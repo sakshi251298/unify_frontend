@@ -11,7 +11,7 @@ import {
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { registerUser } from '../../redux/actions';
-import { Formik, Form, Field} from 'formik';
+import { Formik, Form, Field } from 'formik';
 
 import IntlMessages from '../../helpers/IntlMessages';
 import { Colxx } from '../../components/common/CustomBootstrap';
@@ -44,7 +44,7 @@ function getSteps() {
   return ['Personal Details', 'Qualification Details', 'Interest'];
 }
 
-const Register = ({ history , registerUserAction}) => {
+const Register = ({ history, registerUserAction }) => {
   const [email] = useState('');
   const [password] = useState('');
   const [name] = useState('');
@@ -58,115 +58,91 @@ const Register = ({ history , registerUserAction}) => {
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
 
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return ( <div>
-      <FormGroup className="form-group has-float-label  mb-4">
-        <Label>
-          <IntlMessages id="user.fullname" />
-        </Label>
-        <Field
-                      className="foe-control"
-                      name="name"
-            />
-      </FormGroup>
+  function getStepContent(step) {
+    switch (step) {
+      case 0:
+        return (
+          <div>
+            <FormGroup className="form-group has-float-label  mb-4">
+              <Label>
+                <IntlMessages id="user.fullname" />
+              </Label>
+              <Field className="foe-control" name="name" />
+            </FormGroup>
 
-      <FormGroup className="form-group has-float-label  mb-4">
-        <Label>
-          <IntlMessages id="user.email" />
-        </Label>
-        <Field
-        type="email"
-                      className="form-control"
-                      name="email"
-            />
-      </FormGroup>
+            <FormGroup className="form-group has-float-label  mb-4">
+              <Label>
+                <IntlMessages id="user.email" />
+              </Label>
+              <Field type="email" className="form-control" name="email" />
+            </FormGroup>
 
-      <FormGroup className="form-group has-float-label  mb-4">
-        <Label>
-          <IntlMessages id="user.password" defaultValue={password} />
-        </Label>
-        <Field
-            type="password"
-                      className="form-control"
-                      name="password"
-            />
-      </FormGroup></div>);
-    case 1:
-      return (
-        <div>
-          <Label className="mb-2">
-            <IntlMessages id="HSC/Diploma" />
-          </Label>
-        <FormGroup className="form-group has-float-label  mb-4">
-          <Label>
-            <IntlMessages id="Stream" />
-          </Label>
-          <Field
-                      className="form-control"
-                      name="hscdipstream"
-            />
-        </FormGroup>
-        <Label className="mb-2">
-            <IntlMessages id="Under Graduate" />
-          </Label>
-        <FormGroup className="form-group has-float-label  mb-4">
-          <Label>
-            <IntlMessages id="Degree" />
-          </Label>
-          <Field
-                      className="form-control"
-                      name="degree"
-            />
-        </FormGroup>
+            <FormGroup className="form-group has-float-label  mb-4">
+              <Label>
+                <IntlMessages id="user.password" defaultValue={password} />
+              </Label>
+              <Field type="password" className="form-control" name="password" />
+            </FormGroup>
+          </div>
+        );
+      case 1:
+        return (
+          <div>
+            <Label className="mb-2">
+              <IntlMessages id="HSC/Diploma" />
+            </Label>
+            <FormGroup className="form-group has-float-label  mb-4">
+              <Label>
+                <IntlMessages id="Stream" />
+              </Label>
+              <Field className="form-control" name="hscdipstream" />
+            </FormGroup>
+            <Label className="mb-2">
+              <IntlMessages id="Under Graduate" />
+            </Label>
+            <FormGroup className="form-group has-float-label  mb-4">
+              <Label>
+                <IntlMessages id="Degree" />
+              </Label>
+              <Field className="form-control" name="degree" />
+            </FormGroup>
 
-        <FormGroup className="form-group has-float-label  mb-4">
-          <Label>
-            <IntlMessages id="Degree Stream" />
-          </Label>
-          <Field
-                      className="form-control"
-                      name="degreestream"
-            />
-        </FormGroup></div>
-  );
-    case 2:
-      return (
-        <div>
-      <FormGroup className="form-group has-float-label  mb-4">
-        <Label>
-          <IntlMessages id="What subject do you want to study?" />
-        </Label>
-        <Field
-                      className="form-control"
-                      name="in_sub"
-            />
-        
-      </FormGroup>
-      <FormGroup className="form-group has-float-label  mb-4">
-        <Label>
-          <IntlMessages id="What sports do you play?" />
-        </Label>
-        <Field
-                      className="form-control"
-                      name="in_sports"
-            />
-      </FormGroup>
+            <FormGroup className="form-group has-float-label  mb-4">
+              <Label>
+                <IntlMessages id="Degree Stream" />
+              </Label>
+              <Field className="form-control" name="degreestream" />
+            </FormGroup>
+          </div>
+        );
+      case 2:
+        return (
+          <div>
+            <FormGroup className="form-group has-float-label  mb-4">
+              <Label>
+                <IntlMessages id="What subject do you want to study?" />
+              </Label>
+              <Field className="form-control" name="in_sub" />
+            </FormGroup>
+            <FormGroup className="form-group has-float-label  mb-4">
+              <Label>
+                <IntlMessages id="What sports do you play?" />
+              </Label>
+              <Field className="form-control" name="in_sports" />
+            </FormGroup>
 
-      <FormGroup className="form-group has-float-label  mb-4">
-        <Label>
-          <IntlMessages id="Which location would you most prefer?" />
-        </Label>
-        <Field
-                      className="form-control"
-                      name="in_loc"
-            />
-      </FormGroup></div>);
-    default:
-      return 'Unknown step';
+            <FormGroup className="form-group has-float-label  mb-4">
+              <Label>
+                <IntlMessages id="Which location would you most prefer?" />
+              </Label>
+              <Field className="form-control" name="in_loc" />
+            </FormGroup>
+          </div>
+        );
+      default:
+        return 'Unknown step';
+    }
   }
-}
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -183,10 +159,20 @@ function getStepContent(step) {
     // if (email !== '' && password !== '') {
     //   history.push(adminRoot);
     // }
-    registerUserAction(values,history);
+    registerUserAction(values, history);
   };
 
-  const initialValues = { name,  email, password, hscdipstream, degree, degreestream, in_sub, in_sports, in_loc};
+  const initialValues = {
+    name,
+    email,
+    password,
+    hscdipstream,
+    degree,
+    degreestream,
+    in_sub,
+    in_sports,
+    in_loc,
+  };
   return (
     <Row className="h-100">
       <Colxx xxs="12" md="10" className="mx-auto my-auto">
@@ -206,62 +192,66 @@ function getStepContent(step) {
             <CardTitle className="mb-2">
               <IntlMessages id="user.register" />
             </CardTitle>
-           
+
             <Formik initialValues={initialValues} onSubmit={onUserRegister}>
-          <Form>
-              <div className={classes.root}>
-      <Stepper activeStep={activeStep} orientation="vertical">
-        {steps.map((label, index) => (
-          <Step key={label}>
-            <StepLabel>{label}</StepLabel>
-            <StepContent>
-              <Typography>{getStepContent(index)}</Typography>
-              <div className={classes.actionsContainer}>
-                <div>
-                  <Button
-                    disabled={activeStep === 0}
-                    onClick={handleBack}
-                    className={classes.button}
-                  >
-                    Back
-                  </Button>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleNext}
-                    className={classes.button}
-                  >
-                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                  </Button>
+              <Form>
+                <div className={classes.root}>
+                  <Stepper activeStep={activeStep} orientation="vertical">
+                    {steps.map((label, index) => (
+                      <Step key={label}>
+                        <StepLabel>{label}</StepLabel>
+                        <StepContent>
+                          <Typography>{getStepContent(index)}</Typography>
+                          <div className={classes.actionsContainer}>
+                            <div>
+                              <Button
+                                disabled={activeStep === 0}
+                                onClick={handleBack}
+                                className={classes.button}
+                              >
+                                Back
+                              </Button>
+                              <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={handleNext}
+                                className={classes.button}
+                              >
+                                {activeStep === steps.length - 1
+                                  ? 'Finish'
+                                  : 'Next'}
+                              </Button>
+                            </div>
+                          </div>
+                        </StepContent>
+                      </Step>
+                    ))}
+                  </Stepper>
+                  {activeStep === steps.length && (
+                    <Paper
+                      square
+                      elevation={0}
+                      className={classes.resetContainer}
+                    >
+                      <Typography>
+                        All steps completed - you&apos;re finished
+                      </Typography>
+                      <Button
+                        color="primary"
+                        className="btn-shadow mr-2"
+                        size="lg"
+                        onClick={handleReset}
+                      >
+                        <IntlMessages id="Reset" />
+                      </Button>
+                      <Button color="primary" className="btn-shadow" size="lg">
+                        <IntlMessages id="Submit" />
+                      </Button>
+                    </Paper>
+                  )}
                 </div>
-              </div>
-            </StepContent>
-          </Step>
-        ))}
-      </Stepper>
-      {activeStep === steps.length && (
-        <Paper square elevation={0} className={classes.resetContainer}>
-          <Typography>All steps completed - you&apos;re finished</Typography>
-          <Button 
-             color="primary"
-             className="btn-shadow mr-2"
-             size="lg"
-              onClick={handleReset}>
-            <IntlMessages id="Reset" />
-            
-          </Button>
-          <Button
-                  color="primary"
-                  className="btn-shadow"
-                  size="lg"
-                >
-                  <IntlMessages id="Submit" />
-                </Button>
-        </Paper>
-      )}
-    </div>
-    </Form>
-              </Formik>
+              </Form>
+            </Formik>
           </div>
         </Card>
       </Colxx>
